@@ -50,7 +50,7 @@ class Request {
     public function run() {
         $map = $this->router->getMap();
         if (! $map) {
-            // TODO: throw new Error404
+            throw new HttpError('Not Found', 404);
         }
         
         // Create reflection objects for controller and action
@@ -60,7 +60,7 @@ class Request {
         // Throw Error404 if action arity doesn't coinside
         // with number of params passed
         if ($reflectionMethod->getNumberOfRequiredParameters() < count($map['params'])) {
-            // TODO: throw new Error404
+            throw new HttpError('Not Found', 404);
         }
         
         // Create controller and invoke action
@@ -82,14 +82,14 @@ class Request {
         
         // Throw Error404 if controller file doesn't exist
         if (! is_file($filePath)) {
-            // TODO: throw new Error404
+            throw new HttpError('Not Found', 404);
         }
         
         require_once $filePath;
         
         // Throw Error404 if controller class doesn't exist
         if (! class_exists($controllerName, false)) {
-            // TODO: throw new Error404
+            throw new HttpError('Not Found', 404);
         }
         
         return new ReflectionClass($controller);
@@ -108,7 +108,7 @@ class Request {
         
         // Throw Error404 if controller class doesn't exist
         if ($reflectionController->hasMethod($actionName)) {
-            // TODO: throw new Error404
+            throw new HttpError('Not Found', 404);
         }
         
         return $reflectionController->getMethod($actionName);

@@ -4,4 +4,5 @@
 return array(
     APPDIR . '/classes/models',
     APPDIR . '/classes/utils',
+    APPDIR . '/classes/exceptions',
 );
