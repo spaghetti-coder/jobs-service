@@ -18,3 +18,10 @@ spl_autoload_register(function ($class) {
     }
 });
 
+// Run request
+$url = filter_input(INPUT_GET, 'id') || '';
+try {
+    Request::getInstance($url)->run();
+} catch (HttpError $ex) {
+    header($_SERVER['SERVER_PROTOCOL'] . ' ' . $ex->getCode() . ' ' . $ex->getMessage());
+}
