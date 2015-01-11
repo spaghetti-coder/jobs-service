@@ -18,6 +18,9 @@ spl_autoload_register(function ($class) {
     }
 });
 
+// Include configs
+require_once APPDIR . '/config/db.php';
+
 // Include helper functions
 require_once APPDIR . '/functions.php';
 
