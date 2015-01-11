@@ -92,7 +92,7 @@ class Request {
             throw new HttpError('Not Found', 404);
         }
         
-        return new ReflectionClass($controller);
+        return new ReflectionClass($controllerName);
     }
     
     /**
@@ -107,7 +107,7 @@ class Request {
         $actionName = 'action_' . $action;
         
         // Throw Error404 if controller class doesn't exist
-        if ($reflectionController->hasMethod($actionName)) {
+        if (! $reflectionController->hasMethod($actionName)) {
             throw new HttpError('Not Found', 404);
         }
         
