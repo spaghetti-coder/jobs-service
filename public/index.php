@@ -8,5 +8,6 @@ $appDir = './../application';
  */
 define('APPDIR', realpath($appDir));
 
-
 unset($appDir);
+
+require_once APPDIR . '/bootstrap.php';
