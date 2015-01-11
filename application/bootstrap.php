@@ -18,6 +18,9 @@ spl_autoload_register(function ($class) {
     }
 });
 
+// Include helper functions
+require_once APPDIR . '/functions.php';
+
 // Run request
 $url = filter_input(INPUT_GET, 'id') || '';
 try {
