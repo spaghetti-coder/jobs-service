@@ -15,5 +15,7 @@
 
 // Routes array
 return array(
-    
+    '#jobs#ui'       => 'Jobs@index',
+    '#jobs/(\d+)#ui' => 'Jobs@view',
+    '#candidates#ui' => 'Candidates@index',
 );
