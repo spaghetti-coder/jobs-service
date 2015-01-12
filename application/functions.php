@@ -25,7 +25,7 @@ function getPdo() {
                 $options
             );
         } catch (PDOException $ex) {
-            // FIXME: throw new ServerError
+            throw new ServerError('Internal Server Error', 500);
         }
     }
     
