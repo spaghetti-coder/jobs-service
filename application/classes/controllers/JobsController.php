@@ -1,6 +1,6 @@
 <?php
 
-class JobsController extends BaseServiceController {
+class JobsController extends BaseController {
     /**
      * @var Job
      */
@@ -14,17 +14,13 @@ class JobsController extends BaseServiceController {
     
     public function action_index() {
         $jobs = $this->jobsModel->retrieveAll();
+        $this->printJsonOrFail($jobs);
         exit(json_encode($jobs));
     }
     
     public function action_view($id) {
         $job = $this->jobsModel->retrieveById($id);
         
-        // If the job doesn't exist, throe 400 error
-        if (! $job) {
-            throw new HttpError('Job not found', 400);
-        }
-        
-        exit(json_encode($job));
+        $this->printJsonOrFail($job, 'Job not found');
     }
 }
