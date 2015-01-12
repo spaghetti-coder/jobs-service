@@ -24,8 +24,8 @@ CREATE TABLE jobs (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 3
-AVG_ROW_LENGTH = 8192
+AUTO_INCREMENT = 4
+AVG_ROW_LENGTH = 5461
 CHARACTER SET utf8
 COLLATE utf8_unicode_ci;
 
@@ -40,6 +40,7 @@ CREATE TABLE jobs_to_candidates (
     REFERENCES jobs(id) ON DELETE CASCADE ON UPDATE RESTRICT
 )
 ENGINE = INNODB
+AVG_ROW_LENGTH = 4096
 CHARACTER SET utf8
 COLLATE utf8_unicode_ci;
 
@@ -51,4 +52,11 @@ INSERT INTO candidates VALUES
 
 INSERT INTO jobs VALUES
 (1, 'Programmer', 'Responsibilities:\r\n\r\n* Development of different Internet and Intranet web applications\r\n* Follow specification or written description\r\n* Meeting productivity standards, completion of work in timely manner\r\n* Ability to establish and maintain satisfactory working relationships with co-workers\r\n* Willingness to further develop his/her design skills and technical knowledge', '2015-01-11 22:45:39'),
-(2, 'Web-Designer', '* HTML5\r\n* CSS3\r\n* JS / jQuery / Ajax / JSON\r\n* Slice PSD designs and transform them into working websites\r\n* Responsive websites\r\n* Good working habits\r\n* English (verbal and written)', '2015-01-11 22:47:50');
+(2, 'Web-Designer', '* HTML5\r\n* CSS3\r\n* JS / jQuery / Ajax / JSON\r\n* Slice PSD designs and transform them into working websites\r\n* Responsive websites\r\n* Good working habits\r\n* English (verbal and written)', '2015-01-11 22:47:50'),
+(3, 'Maintenance', 'Cleaning, washing', '2015-01-12 16:01:20');
+
+INSERT INTO jobs_to_candidates VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(1, 4);
