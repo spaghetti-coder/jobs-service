@@ -5,7 +5,7 @@
  * Set public directory as a document root (i.e. leave application directory outside of document root)
    * If you change application directory position relatively to public/index.php, then update $appDir path in index.php as well, because the entry point should know where the application resides
    * application is not necessarily need to be outside of document root but it's a good precaution against direct access to the code files
- * Create a datatbase and import sql dump from assets/db.sql
+ * Create a database and import sql dump from assets/db.sql
  * Change db access credentials to yours in application/config/db.php
 
 ###API
@@ -21,9 +21,9 @@
 
 HTTP status codes list:
 
-* 404 - Not Found. This means tha URL you've entered is not valid
+* 404 - Not Found. This means the URL you've entered is not valid
 * 500 - Internal server error. It denotes a server error
-* 400 - {Entry} not found. This means that the entry coule be there, but it's not. For example /jobs/99999 (in case there is no job with such id) will produce this error
+* 400 - {Entry} not found. This means that the entry could be there, but it's not. For example /jobs/99999 (in case there is no job with such id) will produce this error
 
-Along with this status code you recieve a json, that contains an appropriate message
+Along with this status code you receive a json, that contains an appropriate message
 {"error" : "{error-text}"}
