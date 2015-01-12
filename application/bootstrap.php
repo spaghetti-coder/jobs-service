@@ -25,7 +25,11 @@ require_once APPDIR . '/config/db.php';
 require_once APPDIR . '/functions.php';
 
 // Run request
-$url = filter_input(INPUT_GET, 'id') || '';
+$url = filter_input(INPUT_GET, 'r');
+if (! $url) {
+    $url = '';
+}
+
 try {
     Request::getInstance($url)->run();
 } catch (HttpError $ex) {
