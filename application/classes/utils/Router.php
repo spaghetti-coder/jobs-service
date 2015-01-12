@@ -40,7 +40,7 @@ class Router {
         // Iterate over routes comparing current url with
         // url patterns and return map for the matching one (if any)
         foreach ($routes as $urlPattern => $map) {
-            if (preg_match($urlPattern, $this->url, $matches)) {
+            if (preg_match('#^' . $urlPattern . '$#ui', $this->url, $matches)) {
                 $ret = $this->convertStringMapToArray($map);
                 $ret['params'] = array_slice($matches, 1);
                 
