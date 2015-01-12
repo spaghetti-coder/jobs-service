@@ -13,9 +13,11 @@
 //      (maps /jobs/{job_id}/users/{user_id} to action_viewUser method
 //          in JobsController class with 2 arguments from url)
 
+// TODO: factor out regexp bounds
 // Routes array
 return array(
     '#^jobs$#ui'       => 'Jobs@index',
     '#^jobs/(\d+)$#ui' => 'Jobs@view',
     '#^candidates$#ui' => 'Candidates@index',
+    '#^candidates/(\d+)$#ui' => 'Candidates@view',
 );
