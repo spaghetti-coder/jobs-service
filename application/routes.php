@@ -21,4 +21,5 @@ return array(
     '#^jobs/(\d+)/candidates$#ui' => 'Jobs@viewWithCandidates',
     '#^candidates$#ui' => 'Candidates@index',
     '#^candidates/(\d+)$#ui' => 'Candidates@view',
+    '#^candidates/(\d+)/jobs$#ui' => 'Candidates@viewWithJobs',
 );
