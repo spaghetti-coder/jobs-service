@@ -18,6 +18,7 @@
 return array(
     '#^jobs$#ui'       => 'Jobs@index',
     '#^jobs/(\d+)$#ui' => 'Jobs@view',
+    '#^jobs/(\d+)/candidates$#ui' => 'Jobs@viewWithCandidates',
     '#^candidates$#ui' => 'Candidates@index',
     '#^candidates/(\d+)$#ui' => 'Candidates@view',
 );

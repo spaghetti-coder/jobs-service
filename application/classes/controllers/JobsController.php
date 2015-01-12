@@ -23,4 +23,16 @@ class JobsController extends BaseController {
         
         $this->printJsonOrFail($job, 'Job not found');
     }
+    
+    public function action_viewWithCandidates($id) {
+        $job = $this->jobsModel->retrieveById($id);
+        
+        if (! $job) {
+            throw new HttpError('Job not found', 400);
+        }
+        
+        $candidates = $this->jobsModel->retrieveCandidates($id);
+        $job->candidates = $candidates;
+        $this->printJsonOrFail($job);
+    }
 }
