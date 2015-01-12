@@ -33,5 +33,17 @@ if (! $url) {
 try {
     Request::getInstance($url)->run();
 } catch (HttpError $ex) {
-    header($_SERVER['SERVER_PROTOCOL'] . ' ' . $ex->getCode() . ' ' . $ex->getMessage());
+    $message = $ex->getMessage();
+    header($_SERVER['SERVER_PROTOCOL'] . ' ' . $ex->getCode() . ' ' . $message);
+    
+    exit(json_encode(array(
+        'error' => $message
+    )));
+} catch (ServerError $ex) {
+    $message = $ex->getMessage();
+    header($_SERVER['SERVER_PROTOCOL'] . ' ' . $ex->getCode() . ' ' . $message);
+    
+    exit(json_encode(array(
+        'error' => $message
+    )));
 }
