@@ -35,13 +35,18 @@ abstract class BaseModel {
      */
     public function findById($id) {
         return $this->retrieveByCriteria('id = :id', array(
-            ':id' => $id
+            'id' => $id
         ))->fetch();
     }
     
     /**
      * Get all records from the model's table, that corresond to the criteria
-     * Returns an array of stdClass objects or empty array
+     * Returns an array of stdClass objects or empty array.Usage example:
+     * <pre>
+     *  $fullAgedSimpsons = $this->findByCriteria(
+     *      'lastname = :lastname AND age >= :age',
+     *      array('firstname' => 'simpson', 'age' => 21));
+     * </pre>
      * 
      * @param string $criteria Criteria string
      * @param array  $params Criteria parameters
@@ -59,7 +64,7 @@ abstract class BaseModel {
      * <pre>
      *  $fullAgedSimpsons = $this->retrieveByCriteria(
      *      'lastname = :lastname AND age >= :age',
-     *      array(':firstname' => 'simpson', ':age' => 21));
+     *      array('firstname' => 'simpson', 'age' => 21));
      * </pre>
      * 
      * @param  string $criteria Criteria string
@@ -75,7 +80,7 @@ abstract class BaseModel {
         $stmt = getPdo()->prepare($query);
         // Iterate over placeholders and bind values
         foreach ($params as $placeholder => $value) {
-            $stmt->bindValue($placeholder, $value, PDO::PARAM_STR);
+            $stmt->bindValue(':' . $placeholder, $value, PDO::PARAM_STR);
         }
         // Execute statement
         $stmt->execute();
