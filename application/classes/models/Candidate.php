@@ -10,12 +10,12 @@ class Candidate extends BaseModel {
     }
     
     /**
-     * Retrieve jobs for the candidate
+     * Get jobs for the candidate
      * 
      * @param  int $candidateId Candidate id
      * @return array
      */
-    public function retrieveJobs($candidateId) {
+    public function findJobs($candidateId) {
         $query = 'SELECT j.*'
               . ' FROM jobs AS j'
               . ' INNER JOIN jobs_to_candidates AS j2c ON j.id = j2c.job_id'

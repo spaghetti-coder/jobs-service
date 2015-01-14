@@ -11,13 +11,13 @@ abstract class BaseModel {
     abstract function getPK();
     
     /**
-     * Retrieve all records from the model's table.
+     * Get all records from the model's table.
      * Returns an array of stdClass objects or empty array
      * the table is empty
      * 
      * @return array
      */
-    public function retrieveAll() {
+    public function findAll() {
         $query = 'SELECT *'
               . ' FROM ' . $this->getTableName();
         
@@ -27,13 +27,13 @@ abstract class BaseModel {
     }
     
     /**
-     * Retrieve a record by its id.
+     * Get a record by its id.
      * Returns a strClass object or false if the record doesn't exist
      * 
      * @param  int $id
      * @return stdClass
      */
-    public function retrieveById($id) {
+    public function findById($id) {
         return $this->retrieveByCriteria('id = :id', array(
             ':id' => $id
         ))->fetch();
