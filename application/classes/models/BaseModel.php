@@ -40,6 +40,20 @@ abstract class BaseModel {
     }
     
     /**
+     * Get all records from the model's table, that corresond to the criteria
+     * Returns an array of stdClass objects or empty array
+     * 
+     * @param string $criteria Criteria string
+     * @param array  $params Criteria parameters
+     * @return array
+     */
+    public function findByCriteria($criteria, array $params) {
+        return $this
+                ->retrieveByCriteria($criteria, $params)
+                ->fetchAll();
+    }
+    
+    /**
      * Run sql to retrieve data by criteria and return PDOStatement with result.
      * Uses PDO placeholders. Usage example:
      * <pre>
