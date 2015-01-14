@@ -10,7 +10,18 @@ class CandidatesController extends BaseController {
     }
     
     public function action_index() {
-        $candidates = $this->candidatesModel->findAll();
+        $criteria = '1 = 1';
+        $params = array();
+        
+        // If there is an integer id get params,
+        // add filtering by id
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if ($id) {
+            $criteria .= ' AND id = :id';
+            $params['id'] = $id;
+        }
+        
+        $candidates = $this->candidatesModel->findByCriteria($criteria, $params);
         
         $this->printJsonOrFail($candidates);
     }
