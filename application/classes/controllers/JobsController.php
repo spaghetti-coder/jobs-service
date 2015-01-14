@@ -15,7 +15,6 @@ class JobsController extends BaseController {
     public function action_index() {
         $jobs = $this->jobsModel->findAll();
         $this->printJsonOrFail($jobs);
-        exit(json_encode($jobs));
     }
     
     public function action_view($id) {
