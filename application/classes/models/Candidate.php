@@ -21,13 +21,8 @@ class Candidate extends BaseModel {
               . ' INNER JOIN jobs_to_candidates AS j2c ON j.id = j2c.job_id'
               . ' WHERE j2c.candidate_id = :candidate_id';
         
-        // Prepare query
-        $stmt = getPdo()->prepare($query);
-        $stmt->bindParam(':candidate_id', $candidateId, PDO::PARAM_INT);
-        // Execute query
-        $stmt->execute();
-        
-        // Return result
-        return $stmt->fetchAll();
+        return $this->query($query, array(
+            'candidate_id' => $candidateId,
+        ))->fetchAll();
     }
 }

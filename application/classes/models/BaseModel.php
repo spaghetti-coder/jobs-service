@@ -59,6 +59,31 @@ abstract class BaseModel {
     }
     
     /**
+     * Run sql and return PDOStatement with result. Usage example:
+     * <pre>
+     *  $result = $this->query(
+     *      'SELECT * FROM users WHERE id = :id',
+     *      array('id' => 5));
+     * </pre>
+     * 
+     * @param string $query Query with PDO placeholders
+     * @param array  $params Array of params for placeholders
+     * @return PDOStatement
+     */
+    protected function query($query, array $params = array()) {
+        // Prepare query for further processing
+        $stmt = getPdo()->prepare($query);
+        // Iterate over placeholders and bind values
+        foreach ($params as $placeholder => $value) {
+            $stmt->bindValue(':' . $placeholder, $value, PDO::PARAM_STR);
+        }
+        // Execute statement
+        $stmt->execute();
+        // Return results
+        return $stmt;
+    }
+    
+    /**
      * Run sql to retrieve data by criteria and return PDOStatement with result.
      * Uses PDO placeholders. Usage example:
      * <pre>
@@ -76,15 +101,6 @@ abstract class BaseModel {
                 . ' FROM ' . $this->getTableName()
                 . ' WHERE ' . $criteria;
         
-        // Prepare query for further processing
-        $stmt = getPdo()->prepare($query);
-        // Iterate over placeholders and bind values
-        foreach ($params as $placeholder => $value) {
-            $stmt->bindValue(':' . $placeholder, $value, PDO::PARAM_STR);
-        }
-        // Execute statement
-        $stmt->execute();
-        // Return results
-        return $stmt;
+        return $this->query($query, $params);
     }
 }
