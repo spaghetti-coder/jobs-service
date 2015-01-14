@@ -13,7 +13,7 @@
 * /jobs - list all jobs
 * /jobs/{id} - view a job with the id supplied
 * /candidates - list all candidates
-* /candidates?id={id} - search by id (can be extended later to except more search criteria)
+* /candidates?id={id} - search by id (can be extended later to except more search criteria), it returns a collection of candidates that satisfies of criteria conditions
 * /candidates/{id} - view a candidate with the id supplied
 * /jobs/{id}/candidates - view a job with the id supplies with all candidates for this job
 * /candidates/{id}/jobs - view a candidate with the id supplies with all jobs for this candidate
