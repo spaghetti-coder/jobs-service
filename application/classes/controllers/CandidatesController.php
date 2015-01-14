@@ -18,7 +18,7 @@ class CandidatesController extends BaseController {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         if ($id) {
             $criteria .= ' AND id = :id';
-            $params['id'] = $id;
+            $params[':id'] = $id;
         }
         
         $candidates = $this->candidatesModel->findByCriteria($criteria, $params);
