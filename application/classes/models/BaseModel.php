@@ -34,17 +34,38 @@ abstract class BaseModel {
      * @return stdClass
      */
     public function retrieveById($id) {
-        $query = 'SELECT *'
-              . ' FROM ' . $this->getTableName()
-              . ' WHERE ' . $this->getPK() . ' = :id';
+        return $this->retrieveByCriteria('id = :id', array(
+            ':id' => $id
+        ))->fetch();
+    }
+    
+    /**
+     * Run sql to retrieve data by criteria and return PDOStatement with result.
+     * Uses PDO placeholders. Usage example:
+     * <pre>
+     *  $fullAgedSimpsons = $this->retrieveByCriteria(
+     *      'lastname = :lastname AND age >= :age',
+     *      array(':firstname' => 'simpson', ':age' => 21));
+     * </pre>
+     * 
+     * @param  string $criteria Criteria string
+     * @param  array  $params Criteria parameters
+     * @return PDOStatement
+     */
+    protected function retrieveByCriteria($criteria, array $params) {
+        $query =   'SELECT *'
+                . ' FROM ' . $this->getTableName()
+                . ' WHERE ' . $criteria;
         
         // Prepare query for further processing
         $stmt = getPdo()->prepare($query);
-        // Bind id as an int
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        // Iterate over placeholders and bind values
+        foreach ($params as $placeholder => $value) {
+            $stmt->bindValue($placeholder, $value, PDO::PARAM_STR);
+        }
         // Execute statement
         $stmt->execute();
-        // Return first result
-        return $stmt->fetch();
+        // Return results
+        return $stmt;
     }
 }
